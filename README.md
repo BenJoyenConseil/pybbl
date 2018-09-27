@@ -2,6 +2,9 @@
 
 	pip install pybbl
 
+
+
+
 ---
 # packagin' who ?
 		
@@ -16,6 +19,9 @@
 
 **setuptools** c'est l'outil standard (remplace distutils, distutils2, easy_install, etc..)
 
+
+
+
 ---
 # OK, let's do this
 
@@ -24,8 +30,10 @@
     echo "setup()" >> setup.py
     python setup.py sdist
 
-### 
+#
 	ll -R
+
+
 
 ---
 # python setup.py sdist ?
@@ -39,11 +47,17 @@ Demande à python d'éxécuter la function `setup()` de setuptools pour construi
 #
 *source distribution : une archive du projet avec les *.py et l'arborescence des packages
 
+
+
 ---
 ```
 pip install dist/UNKNOWN-0.0.0.tar.gz
+
+# and check the result
 ll lib/python3.6/site-packages/UNKNOWN-0.0.0-py3.6.egg
-```
+
+
+
 
 ---
 #	 vim setup.py
@@ -51,9 +65,11 @@ ll lib/python3.6/site-packages/UNKNOWN-0.0.0-py3.6.egg
 from setuptools import setup
 
 setup(
-    py_modules=['iamamodule']
+	...
 )
 ```
+
+[bbl repo interactif : https://github.com/BenJoyenConseil/pybbl](https://github.com/BenJoyenConseil/pybbl)
 
 ---
 distribution != package != module != extension
@@ -67,28 +83,67 @@ distribution != package != module != extension
 #
 * **extension** = une librairie externe qui n'est pas du Python, à embarquer dans la distribution (lib C, C++)
 
----
-# Using my sdist with pip
 
-	pip install dist/UNKNOWN-0.0.0.tar.gz
+
 
 ---
-When sdist? when Wheel ?
-===
+# When sdist? when Wheel ?
 
 Packaging Gradient
 
 # ![](https://packaging.python.org/_images/py_pkg_tools_and_libs.png)
 
----
-Who for ? what for ?
-===
 
-* **Setuptools** (setup.py + setup.cfg + MANIFEST.in) : pour pip et [PYPI](https://pypi.org/)
+
+
+---
+# PyPi
+
+* Upload avec twine
+* De préférence les deux types de distribution : wheel et source
+* Le nom de la distribution (dans setup.py) = `pip install nom_distribution`
+* Le nom du package = site-package/nom_package
+* Une distribution peut donc contenir plusieurs packages
+
+
+
+
+---
+# No more sys.append
+
+```md
+pip install -e .
+
+# équivalent de 
+python setup.py develop
+```
 #
-* **Makefile** + **venv** : install global d'un env Python
 #
-* **Dockerfile** : isolation total
+#
+Pour accéder à votre package en cours de développement depuis un autre projet
+
+
+
+
+---
+# Who for ? what for ?
+
+* **Setuptools** (setup.py + setup.cfg + MANIFEST.in) : pour pip et [PyPI](https://pypi.org/) (si d'autres personnes veulent utiliser votre package, c'est le mieux)
+#
+* **conda** (env.yaml) ou **venv** (requirements.txt) : installation global d'un env Python (cool pour le dev)
+#
+* **Makefile** : point d'entrée pour installer, tester, packager, distribuer (le pont entre le process d'install sur la prod et sur la dev)
+#
+* **Dockerfile** : isolation totale avec les libs du système
+
+
+
+
+---
+		Dev / Build dist / Test / Deploy / Run
+
+
+
 
 ---
 REFs
