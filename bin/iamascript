@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+import colored
+from colored import stylize
+print(stylize("Est-ce que c'est intéressant jusqu'ici ?", colored.fg("white")))
