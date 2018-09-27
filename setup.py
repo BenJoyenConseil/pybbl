@@ -5,4 +5,6 @@ setup(
     version='1.0.0.dev0',
     install_requires=['colored', 'pandas', 'numpy'],
     packages=find_packages(),
+    py_modules=['iamamodule'],
+    scripts=['bin/iamascript'],
 )
