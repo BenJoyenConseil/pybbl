@@ -7,4 +7,8 @@ setup(
     packages=find_packages(),
     py_modules=['iamamodule'],
     scripts=['bin/iamascript'],
+    include_package_data=True, # https://setuptools.readthedocs.io/en/latest/setuptools.html#including-data-files
+    package_data={
+            '': ['data/*.csv'], # https://setuptools.readthedocs.io/en/latest/setuptools.html#including-data-files
+        }
 )
